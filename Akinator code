@@ -1,0 +1,72 @@
+# --- Import a library ---
+import random  # used to randomize question order and teacher choices
+
+# Start of the program
+name = input("What is your name? ")
+print("Hello, " + name + "! This is a test for Heschel students, so make sure you go to Heschel.\n")
+
+# --- 5 Yes/No Questions ---
+score = 0  # to keep track of correct answers
+
+print("Let's start with 5 Yes/No questions!\n")
+
+# Store questions and correct answers in a list of tuples
+questions = [
+    ("Is Heschel a school?", "yes"),
+    ("Do students at Heschel study underwater?", "no"),
+    ("Is Python a programming language?", "yes"),
+    ("Do teachers teach math by dancing?", "no"),
+    ("Is learning fun at Heschel?", "yes")
+]
+
+# Shuffle the question order using the random library
+random.shuffle(questions)
+
+# Ask each question
+for q, correct_answer in questions:
+    answer = input(q + " (yes/no): ").lower()
+    if answer == correct_answer:
+        print("Correct!\n")
+        score += 1
+    else:
+        print("Wrong!\n")
+
+print("You got", score, "out of 5 questions correct!\n")
+
+# --- Nested if statement to check pass/fail ---
+if score >= 3:
+    print("You passed the quiz!")
+    if score == 5:
+        print("Amazing job! You got a perfect score!\n")
+    else:
+        print("Great work! You did really well.\n")
+else:
+    print("You didn’t pass this time. Keep studying and try again!\n")
+
+# --- Teacher Guessing Game ---
+correct_teachers = ["aj", "rabbi dalia", "steven"]
+max_attempts = 5
+
+print("Now let's play 'Guess the Teacher from Heschel!'")
+print("(Type 'I give up' if you want to stop.)\n")
+
+# Use random.choice to secretly pick one teacher to guess
+chosen_teacher = random.choice(correct_teachers)
+
+attempts = 0
+while True:
+    guess = input("Guess the teacher from Heschel: ").lower()
+    attempts += 1
+
+    if guess == "i give up":
+        print(f"\nThat's okay! The correct teacher was: {chosen_teacher.title()}.")
+        break
+    elif guess == chosen_teacher:
+        print(f"\nYou got it! The teacher was {chosen_teacher.title()}!")
+        break
+    else:
+        print("How could you get the teacher wrong...\n")
+
+    if attempts >= max_attempts:
+        print(f"\nLooks like you’ve tried a lot! The correct teacher was {chosen_teacher.title()}.")
+        break
